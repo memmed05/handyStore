@@ -4,5 +4,5 @@ import com.example.handy.model.UserInfo;
 
 public interface UserInfoService {
 
-    UserInfo updateUserInfo(Integer id,UserInfo userInfo);
+    UserInfo setUserInfo(Integer id,UserInfo userInfo);
 }

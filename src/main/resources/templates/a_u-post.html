@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html
+        lang="en"
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="https://www.thymeleaf.org"
-        lang="en">
+        xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <script
-            src="https://kit.fontawesome.com/38cd4014df.js"
             crossorigin="anonymous"
+            src="https://kit.fontawesome.com/38cd4014df.js"
     ></script>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
@@ -20,8 +20,8 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="icon" th:href="@{/img/logo/ico2.ico}">
-    <title th:if="${post.getId()} !=0 " th:text="${post.getName()} + ' | Update'"></title>
-    <title th:if="${post.getId()} ==0" th:text="'New post'"></title>
+        <title th:if="${post.getId()} !=0 " th:text="${post.getName()} + ' | Update'"></title>
+        <title th:if="${post.getId()} ==0" th:text="'New post'"></title>
 </head>
 <body>
 
@@ -29,26 +29,26 @@
     <div class="e-nav-container">
         <ul class="col-12 e-nav-list">
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a href="/dashboard" class="nav-link e-nav-link"><i class="fas fa-columns mr-2"></i>Dashboard</a>
+                <a class="nav-link e-nav-link" href="/dashboard"><i class="fas fa-columns mr-2"></i>Dashboard</a>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle e-main-dropdown" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn dropdown-toggle e-main-dropdown"
+                            data-toggle="dropdown" id="dropdownMenuButton" type="button">
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
-                    <div class="dropdown-menu e-dd-content" aria-labelledby="dropdownMenuButton">
-                        <a href="/myposts" class="dropdown-item"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
-                        <a href="/wishlist" class="dropdown-item"><i class="fas fa-heart mr-2"></i>View your
+                    <div aria-labelledby="dropdownMenuButton" class="dropdown-menu e-dd-content">
+                        <a class="dropdown-item" href="/myposts"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a class="dropdown-item" href="/wishlist"><i class="fas fa-heart mr-2"></i>View your
                             wishlist</a>
                     </div>
                 </div>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
-                <a href="/message" class="nav-link e-nav-link"><i class="fas fa-envelope mr-2"></i>Messages</a>
+                <a class="nav-link e-nav-link" href="/message"><i class="fas fa-envelope mr-2"></i>Messages</a>
             </li>
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a href="/logout" class="nav-link e-nav-link"><i class="fas fa-sign-out-alt mr-2"></i>Log out</a>
+                <a class="nav-link e-nav-link" href="/logout"><i class="fas fa-sign-out-alt mr-2"></i>Log out</a>
             </li>
         </ul>
     </div>
@@ -58,26 +58,26 @@
                 <img src="../static/img/logo/123.jpg" width="300" height="150" alt="">
             </div>
             <div class="e-posting-info">
-                <form method="post" enctype="multipart/form-data"
-                      class="col-lg-12 col-md-6 col-sm-12 form-group d-inline-block e-form">
-                    <input th:value="${post.name}" name="name" required type="text" class="col-12 form-control-lg e-input"
-                           placeholder="Enter product name">
-                    <select required name="category" class="col-12 form-control-lg e-input">
+                <form class="col-lg-12 col-md-6 col-sm-12 form-group d-inline-block e-form" enctype="multipart/form-data"
+                      th:action="@{/post/addPost}" method="post">
+                    <input class="col-12 form-control-lg e-input" name="name" placeholder="Enter product name" required
+                           type="text">
+                    <select class="col-12 form-control-lg e-input" name="category" required>
                         <option disabled selected>Select category</option>
-                        <option th:each="cat : ${categories}" th:selected="${cat.id}==${post.category.getId()}"
+                        <option th:each="cat : ${categories}"
                                 th:text="${cat.name}" th:value="${cat.id}"></option>
                     </select>
-                    <select required name="city" class="col-12 form-control-lg e-input">
+                    <select class="col-12 form-control-lg e-input" name="city" required>
                         <option disabled selected>Select your city</option>
-                        <option th:each="city : ${cities}" th:selected="${city.name}==${post.city}"
-                                th:text="${city.name}" th:value="${city.name}"></option>
+                        <option th:each="city : ${cities}"
+                                th:text="${city.name}" th:value="${city.id}"></option>
                     </select>
-                    <input th:value="${post.expiry_date}" name="expiryDate" required type="date"
-                           class="col-12 form-control-lg e-input"
-                           placeholder="Enter expiry date">
+                    <input class="col-12 form-control-lg e-input" name="expiryDate" placeholder="Enter expiry date"
+                           required
+                           type="date">
                     <label for="profile-pic" class="form-control-lg form-control text-left e-label">Upload image </label>
                     <input required name="image" type="file" class="col-12 form-control-file-lg e-file" id="profile-pic">
-                    <input name="save" type="submit" value="Save" class="col-12 form-control e-submit">
+                    <input class="col-12 form-control e-submit" name="save" type="submit" value="Save">
                 </form>
             </div>
         </div>
@@ -86,20 +86,26 @@
     <footer class="col-12 mt-3 e-footer-container" id="contact">
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage your account</a></li>
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage your posts</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage
+                    your account</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage
+                    your posts</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item"><a href="/feedback" class=""><i class="fas fa-exclamation-triangle col-2"></i>Send feedback</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="/feedback"><i
+                        class="fas fa-exclamation-triangle col-2"></i>Send feedback</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.facebook.com/"><i class="fab fa-facebook-f col-2"></i>Facebook</a></li>
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.instagram.com/"><i class="fab fa-instagram col-2"></i>Instagram</a></li>
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://twitter.com/"><i class="fab fa-twitter col-2"></i>Twitter</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.facebook.com/"><i
+                        class="fab fa-facebook-f col-2"></i>Facebook</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.instagram.com/"><i
+                        class="fab fa-instagram col-2"></i>Instagram</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://twitter.com/"><i
+                        class="fab fa-twitter col-2"></i>Twitter</a></li>
             </ul>
         </section>
     </footer>

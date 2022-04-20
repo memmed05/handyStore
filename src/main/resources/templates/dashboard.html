@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html
+        lang="en"
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="https://www.thymeleaf.org"
-        lang="en">
+        xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <script
-            src="https://kit.fontawesome.com/38cd4014df.js"
             crossorigin="anonymous"
+            src="https://kit.fontawesome.com/38cd4014df.js"
     ></script>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
@@ -25,29 +25,38 @@
 <body>
 
 <div class="container-fluid col-12 mt-1 text-center main-container">
-    <div th:if="${(param.process != null) and (param.process[0] == 'profileupdated')}" class="d-block col-12 alert alert-success">
+    <div class="d-block col-12 alert alert-success"
+         th:if="${(param.process != null) and (param.process[0] == 'profileupdated')}">
         Profile updated successfully!
     </div>
-    <div th:if="${(param.process != null) and (param.process[0] == 'blocking')}" class="d-block col-12 alert alert-success">
+    <div class="d-block col-12 alert alert-success"
+         th:if="${(param.process != null) and (param.process[0] == 'blocking')}">
         User is blocked successfully! They will not be able to visit your profile or send message anymore!
     </div>
-    <div th:if="${(param.process != null) and (param.process[0] == 'feedback')}" class="d-block col-12 alert alert-success">
+    <div class="d-block col-12 alert alert-success"
+         th:if="${(param.process != null) and (param.process[0] == 'feedback')}">
         Thank you for sending feedback. We really appreciate all of our users opinion :).
     </div>
-    <div th:if="${(param.error != null) and (param.error[0] == 'blocked')}" class="d-block col-12 alert alert-danger">
+    <div class="d-block col-12 alert alert-danger" th:if="${(param.error != null) and (param.error[0] == 'blocked')}">
         This user has blocked you. You can not visit their profile or can not send message :(
     </div>
 
     <div class="e-nav-container">
         <ul class="col-12 e-nav-list">
-            <li th:if="${#strings.contains(#httpServletRequest.requestURI, 'dashboard')}" class="col-lg-4 col-md-12 col-sm-12 e-nav-item">
-                <a href="/update" class="nav-link  text-left e-nav-link d-flex text-center d-flex justify-content-center">
-                    <img src="img/logo/123.jpg" th:src="@{${loggedUser.getImage()}}" width="50" height="50" class="e-profile-img" alt="profile picture">
-                    <p th:text="${loggedUser.getName()}+' '+${loggedUser.getSurname()}" class="ml-2 e-par">Emin Israfilzadeh</p>
+            <li class="col-lg-4 col-md-12 col-sm-12 e-nav-item"
+                th:if="${#strings.contains(#httpServletRequest.requestURI, 'dashboard')}">
+                <a class="nav-link  text-left e-nav-link d-flex text-center d-flex justify-content-center"
+                   href="/update">
+                    <img alt="profile picture" class="e-profile-img" height="50" src="img/logo/123.jpg"
+                         th:src="@{${loggedUser.getImage()}}" width="50">
+                    <p class="ml-2 e-par" th:text="${loggedUser.getName()}+' '+${loggedUser.getSurname()}">Emin
+                        Israfilzadeh</p>
                 </a>
             </li>
-            <li th:unless="${#strings.contains(#httpServletRequest.requestURI, 'dashboard')}" class="col-lg-4 col-md-12 col-sm-12 e-nav-item">
-                <a href="/dashboard" class="nav-link  text-left e-nav-link d-flex text-center d-flex justify-content-center">
+            <li class="col-lg-4 col-md-12 col-sm-12 e-nav-item"
+                th:unless="${#strings.contains(#httpServletRequest.requestURI, 'dashboard')}">
+                <a class="nav-link  text-left e-nav-link d-flex text-center d-flex justify-content-center"
+                   href="/dashboard">
                     Dashboard
                 </a>
             </li>
@@ -55,102 +64,116 @@
 
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle e-main-dropdown" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn dropdown-toggle e-main-dropdown"
+                            data-toggle="dropdown" id="dropdownMenuButton" type="button">
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
-                    <div class="dropdown-menu e-dd-content" aria-labelledby="dropdownMenuButton">
-                        <a href="/myposts" class="dropdown-item"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
-                        <a href="/wishlist" class="dropdown-item"><i class="fas fa-heart mr-2"></i>View your wishlist</a>
+                    <div aria-labelledby="dropdownMenuButton" class="dropdown-menu e-dd-content">
+                        <a class="dropdown-item" href="/myposts"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a class="dropdown-item" href="/wishlist"><i class="fas fa-heart mr-2"></i>View your
+                            wishlist</a>
                     </div>
                 </div>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
-                <a href="/message" class="nav-link e-nav-link"><i class="fas fa-envelope mr-2"></i>Messages</a>
+                <a class="nav-link e-nav-link" href="/message"><i class="fas fa-envelope mr-2"></i>Messages</a>
             </li>
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a href="/logout" class="nav-link e-nav-link"><i class="fas fa-sign-out-alt mr-2"></i>Sign out</a>
+                <a class="nav-link e-nav-link" href="/logout"><i class="fas fa-sign-out-alt mr-2"></i>Sign out</a>
             </li>
         </ul>
     </div>
     <div class="e-search-container">
-        <form method="post" class="e-form">
+        <form class="e-form" method="post">
             <ul class="col-12 e-search-list">
                 <li class="col-lg-4 col-md-4 col-sm-12 e-search-item">
-                    <input required name="keyword" type="search" class="form-control e-input" placeholder="Enter your keyword">
+                    <input class="form-control e-input" name="keyword" placeholder="Enter your keyword" required
+                           type="search">
                 </li>
                 <li class="col-lg-4 col-md-4 col-sm-12 e-search-item">
-                    <label for="category-sel" class="col-2">in</label>
-                    <select required name="category" class="custom-select col-lg-9 col-md-9 col-sm-12 e-input" id="category-sel">
-                        <option selected disabled value="0">Select category</option>
-                        <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                    <label class="col-2" for="category-sel">in</label>
+                    <select class="custom-select col-lg-9 col-md-9 col-sm-12 e-input" id="category-sel" name="category"
+                            required>
+                        <option disabled selected value="0">Select category</option>
+                        <option th:each="cat : ${categories}" th:text="${cat.name}" th:value="${cat.id}"></option>
                     </select>
                 </li>
                 <li class="col-lg-4 col-md-4 col-sm-12 e-search-item">
-                    <input name="search" type="submit" value="Search" class="col-12 btn e-submit">
+                    <input class="col-12 btn e-submit" name="search" type="submit" value="Search">
                 </li>
 
             </ul>
         </form>
     </div>
-    <div th:if="${(param.error != null) and (param.error[0] == 'postnotfound')}" class="d-block col-12 alert alert-danger">
+    <div class="d-block col-12 alert alert-danger"
+         th:if="${(param.error != null) and (param.error[0] == 'postnotfound')}">
         No post found according to your input
     </div>
     <article class="e-post-container">
 
-        <section th:if="${(posts.size()!=0) or posts.size() != 1}" th:each="post : ${posts}" class="col-lg-3 col-md-4 col-sm-12 p-0 e-post-content">
+        <section class="col-lg-3 col-md-4 col-sm-12 p-0 e-post-content" th:each="post : ${posts}"
+                 th:if="${(posts.size()!=0) or posts.size() != 1}">
 
-                <div class="position-relative e-post-top">
-                    <div class="position-absolute e-post-datetime">
-                        <p th:text="${post.date}" class="col-12 m-0 font-weight-bold e-post-date">20.10.2020</p>
+            <div class="position-relative e-post-top">
+                <div class="position-absolute e-post-datetime">
+                    <p class="col-12 m-0 font-weight-bold e-post-date" th:text="${post.date}">20.10.2020</p>
+                </div>
+                <div class="e-post-img">
+                    <img alt="post" src="img/logo/123.jpg" style="height: 250px; object-fit: contain"
+                         th:src="${post.image}">
+                </div>
+            </div>
+            <div class="e-post-bottom">
+                <div class="e-post-info">
+                    <div class="e-post-data">
+                        <p class="col-12 mb-1 text-center" style="color: white" th:text="${post.name}">Boy</p>
+                        <i class="fas fa-user col-2"></i>
+                        <a class="card-link"
+                           th:href="'/user/'+${post.user.getId()}" th:text="${post.user.getName()} + ' ' + ${post.user.getSurname()}">Emin
+                            Israfilzadeh</a>
                     </div>
-                    <div class="e-post-img">
-                        <img src="img/logo/123.jpg" th:src="${post.image}" style="height: 250px; object-fit: contain" alt="post">
+                    <div class="e-post-data">
+                        <i class="fas fa-city col-2"></i>
+                        <p class="d-inline-block" th:text="${post.city}">Baku</p>
+                    </div>
+                    <div class="e-post-data">
+                        <i class="far fa-calendar-alt col-2"></i>
+                        <p class="d-inline-block" th:text="${post.expiry_date}">23.07.2020</p>
                     </div>
                 </div>
-                <div class="e-post-bottom">
-                    <div class="e-post-info">
-                        <div class="e-post-data">
-                            <p th:text="${post.name}" class="col-12 mb-1 text-center" style="color: white">Boy</p>
-                            <i class="fas fa-user col-2"></i>
-                            <a th:href="'/user/'+${post.user.getId()}" th:text="${post.user.getName()} + ' ' + ${post.user.getSurname()}" class="card-link">Emin Israfilzadeh</a>
-                        </div>
-                        <div class="e-post-data">
-                            <i class="fas fa-city col-2"></i>
-                            <p th:text="${post.city}" class="d-inline-block">Baku</p>
-                        </div>
-                        <div class="e-post-data">
-                            <i class="far fa-calendar-alt col-2"></i>
-                            <p th:text="${post.expiry_date}" class="d-inline-block">23.07.2020</p>
-                        </div>
-                    </div>
-                    <div class="e-post-contact">
-                        <i class="fas fa-envelope col-2"></i>
-                        <a th:href="'/message/'+${post.getUser().getId()}" class="card-link e-post-data">Send message</a>
-                    </div>
-                    <div class="e-post-wishlist">
-                        <i class="fas fa-heart col-2"></i>
-                        <a th:if="${(wished!=null) and (wished==true)}" th:text="'Remove from wishlist'" th:href="'/wishlist/delete/' + ${post.id}" class="card-link e-post-data">Add to wishlist</a>
-                        <a th:if="${(wished==null)}" th:text="'Add to wishlist'" th:href="'/wishlist/add/' + ${post.id}" class="card-link e-post-data"></a>
-                    </div>
+                <div class="e-post-contact">
+                    <i class="fas fa-envelope col-2"></i>
+                    <a class="card-link e-post-data" th:href="'/message/'+${post.getUser().getId()}">Send message</a>
                 </div>
-            </section>
+                <div class="e-post-wishlist">
+                    <i class="fas fa-heart col-2"></i>
+                    <a class="card-link e-post-data" th:href="'/wishlist/delete/' + ${post.id}"
+                       th:if="${(wished!=null) and (wished==true)}" th:text="'Remove from wishlist'">Add to wishlist</a>
+                    <a class="card-link e-post-data" th:href="'/wishlist/add/' + ${post.id}" th:if="${(wished==null)}"
+                       th:text="'Add to wishlist'"></a>
+                </div>
+            </div>
+        </section>
     </article>
-    <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'dashboard')}" class="col-12 mt-3 e-pagination-container">
+    <div class="col-12 mt-3 e-pagination-container"
+         th:if="${#strings.contains(#httpServletRequest.requestURI, 'dashboard')}">
         <nav aria-label="Page navigation example">
             <ul class="pagination pagination-lg justify-content-center">
 
                 <li class="page-item">
-                    <a class="page-link" tabindex="-1" aria-disabled="true" th:if="${currentPage>1}" th:href="@{'/dashboard/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}">Previous</a>
+                    <a aria-disabled="true" class="page-link" tabindex="-1" th:href="@{'/dashboard/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                       th:if="${currentPage>1}">Previous</a>
                 </li>
 
                 <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPages)}">
-                    <a class="page-link" th:if="${i!=currentPage}" th:href="@{'/dashboard/' + ${i} +'?sortField='+${sortField}+'&sortDir='+${sortDir}}">[[${i}]]</a>
+                    <a class="page-link" th:href="@{'/dashboard/' + ${i} +'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                       th:if="${i!=currentPage}">[[${i}]]</a>
                     <span class="page-link" th:unless="${i!=currentPage}">[[${i}]]</span>
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link" th:if="${currentPage<totalPages}" th:href="@{'/dashboard/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}">Next</a>
+                    <a class="page-link" th:href="@{'/dashboard/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                       th:if="${currentPage<totalPages}">Next</a>
                     <span class="page-link" th:unless="${currentPage<totalPages}">Next</span>
                 </li>
             </ul>
@@ -163,20 +186,26 @@
     <footer class="col-12 mt-3 e-footer-container" id="contact">
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage your account</a></li>
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage your posts</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage
+                    your account</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage
+                    your posts</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item"><a href="/feedback" class=""><i class="fas fa-exclamation-triangle col-2"></i>Send feedback</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="/feedback"><i
+                        class="fas fa-exclamation-triangle col-2"></i>Send feedback</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.facebook.com/"><i class="fab fa-facebook-f col-2"></i>Facebook</a></li>
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.instagram.com/"><i class="fab fa-instagram col-2"></i>Instagram</a></li>
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://twitter.com/"><i class="fab fa-twitter col-2"></i>Twitter</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.facebook.com/"><i
+                        class="fab fa-facebook-f col-2"></i>Facebook</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.instagram.com/"><i
+                        class="fab fa-instagram col-2"></i>Instagram</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://twitter.com/"><i
+                        class="fab fa-twitter col-2"></i>Twitter</a></li>
             </ul>
         </section>
     </footer>

@@ -53,9 +53,9 @@
     </div>
     <div class="col-12 e-user-container">
         <div class="e-user-content">
-            <div class="e-user-img">
+            <!--<div class="e-user-img">
                 <img th:src="${loggedUser.image}" width="200" height="200" alt="">
-            </div>
+            </div>-->
             <div class="e-user-info">
                 <form method="post" enctype="multipart/form-data"
                       class="col-12 form-group d-inline-block e-form">
@@ -73,10 +73,10 @@
                         <option disabled selected>Select your city</option>
                         <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
                     </select>
-                    <input name="number" required type="text" class="col-12 form-control e-input"
+                    <input name="phoneNumber" required type="text" class="col-12 form-control e-input"
                            placeholder="Enter your mobile number: XXYYYZZWW">
                     <label for="profile-pic" class="form-control text-left e-label">Upload profile photo</label>
-                    <input name="image" required type="file" class="col-12 form-control-file e-file" id="profile-pic">
+                    <input name="profilePhoto" required type="file" class="col-12 form-control-file e-file" id="profile-pic">
                     <input type="submit" value="Save" class="col-12 form-control e-submit">
                 </form>
             </div>

@@ -5,12 +5,12 @@
         xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <script
-            src="https://kit.fontawesome.com/38cd4014df.js"
             crossorigin="anonymous"
+            src="https://kit.fontawesome.com/38cd4014df.js"
     ></script>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
@@ -28,26 +28,26 @@
     <div class="e-nav-container">
         <ul class="col-12 e-nav-list">
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a href="/dashboard" class="nav-link e-nav-link"><i class="fas fa-columns mr-2"></i>Dashboard</a>
+                <a class="nav-link e-nav-link" href="/dashboard"><i class="fas fa-columns mr-2"></i>Dashboard</a>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle e-main-dropdown" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn dropdown-toggle e-main-dropdown"
+                            data-toggle="dropdown" id="dropdownMenuButton" type="button">
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
-                    <div class="dropdown-menu e-dd-content" aria-labelledby="dropdownMenuButton">
-                        <a href="/myposts" class="dropdown-item"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
-                        <a href="/wishlist" class="dropdown-item"><i class="fas fa-heart mr-2"></i>View your
+                    <div aria-labelledby="dropdownMenuButton" class="dropdown-menu e-dd-content">
+                        <a class="dropdown-item" href="/myposts"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a class="dropdown-item" href="/wishlist"><i class="fas fa-heart mr-2"></i>View your
                             wishlist</a>
                     </div>
                 </div>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
-                <a href="/message" class="nav-link e-nav-link"><i class="fas fa-envelope mr-2"></i>Messages</a>
+                <a class="nav-link e-nav-link" href="/message"><i class="fas fa-envelope mr-2"></i>Messages</a>
             </li>
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a href="/logout" class="nav-link e-nav-link"><i class="fas fa-sign-out-alt mr-2"></i>Log out</a>
+                <a class="nav-link e-nav-link" href="/logout"><i class="fas fa-sign-out-alt mr-2"></i>Log out</a>
             </li>
         </ul>
     </div>
@@ -73,29 +73,30 @@
                         Expiry date
                     </a>
                 </th>
-                <th scope="col" colspan="2">
+                <th colspan="2" scope="col">
                     Action
                 </th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="post : ${posts}">
-                <td><img th:src="${post.image}" style="border-radius: 50%" width="50" height="50" alt=""></td>
-                <td th:text="${post.name}" class="align-middle"></td>
-                <td th:text="${post.category.getName()}" class="align-middle"></td>
-                <td th:text="${post.expiry_date}" class="align-middle"></td>
+                <td><img alt="" height="50" style="border-radius: 50%" th:src="${post.imageUrl}" width="50"></td>
+                <td class="align-middle" th:text="${post.name}"></td>
+                <td class="align-middle" th:text="${post.category.getName()}"></td>
+                <td class="align-middle" th:text="${post.expiryDate}"></td>
                 <td class="align-middle">
-                    <a th:href="'/mypost/' + ${post.id}" class="btn btn-lg" style="color: rgba(0, 11, 141, 0.7)">
+                    <a class="btn btn-lg" style="color: rgba(0, 11, 141, 0.7)" th:href="'/mypost/' + ${post.id}">
                         <i class="fas fa-edit"></i></a>
                 </td>
                 <td class="align-middle">
-                    <a th:href="'/myposts/delete/' + ${post.id}" class="btn btn-lg" style="color: rgba(0, 11, 141, 0.7)">
+                    <a class="btn btn-lg" style="color: rgba(0, 11, 141, 0.7)"
+                       th:href="'/myposts/delete/' + ${post.id}">
                         <i class="fas fa-times"></i></a>
                 </td>
             </tr>
             <tr>
                 <td colspan="6">
-                    <a th:href="'/mypost/0'" class="col-12 btn font-weight-bold" style="color:rgba(0, 11, 141, 0.7)"> <i
+                    <a class="col-12 btn font-weight-bold" style="color:rgba(0, 11, 141, 0.7)" th:href="'/post'"> <i
                             class="fas fa-plus mr-2"></i>Add</a>
                 </td>
             </tr>
@@ -104,41 +105,47 @@
 
 
     </div>
-    <div>
-        <a th:if="${currentPage>1}"
-           th:href="@{'/myposts/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}">Previous</a>
+  <!--  <div>
+        <a th:href="@{'/myposts/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+           th:if="${currentPage>1}">Previous</a>
         <span th:unless="${currentPage>1}">Previous</span>
 
 
         <span th:each="i: ${#numbers.sequence(1,totalPages)}">
-            <a th:if="${i!=currentPage}"
-               th:href="@{'/myposts/' + ${i} +'?sortField='+${sortField}+'&sortDir='+${sortDir}}">[[${i}]]</a>
+            <a th:href="@{'/myposts/' + ${i} +'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+               th:if="${i!=currentPage}">[[${i}]]</a>
             <span th:unless="${i!=currentPage}">[[${i}]]</span>
             </span>
 
 
-        <a th:if="${currentPage<totalPages}"
-           th:href="@{'/myposts/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}">Next</a>
+        <a th:href="@{'/myposts/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+           th:if="${currentPage<totalPages}">Next</a>
         <span th:unless="${currentPage<totalPages}">Next</span>
     </div>
-
+-->
     <footer class="col-12 mt-3 e-footer-container" id="contact">
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage your account</a></li>
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage your posts</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage
+                    your account</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage
+                    your posts</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item"><a href="/feedback" class=""><i class="fas fa-exclamation-triangle col-2"></i>Send feedback</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="/feedback"><i
+                        class="fas fa-exclamation-triangle col-2"></i>Send feedback</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.facebook.com/"><i class="fab fa-facebook-f col-2"></i>Facebook</a></li>
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.instagram.com/"><i class="fab fa-instagram col-2"></i>Instagram</a></li>
-                <li class="col-12 my-1 e-footer-item"><a class="" href="https://twitter.com/"><i class="fab fa-twitter col-2"></i>Twitter</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.facebook.com/"><i
+                        class="fab fa-facebook-f col-2"></i>Facebook</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.instagram.com/"><i
+                        class="fab fa-instagram col-2"></i>Instagram</a></li>
+                <li class="col-12 my-1 e-footer-item"><a class="" href="https://twitter.com/"><i
+                        class="fab fa-twitter col-2"></i>Twitter</a></li>
             </ul>
         </section>
     </footer>

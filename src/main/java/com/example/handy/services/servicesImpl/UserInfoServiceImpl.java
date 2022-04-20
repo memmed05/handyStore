@@ -16,7 +16,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
     @Override
-    public UserInfo updateUserInfo(Integer id, UserInfo userInfo) {
+    public UserInfo setUserInfo(Integer id, UserInfo userInfo) {
         userInfo.setUser(userRepository.getById(id));
         return this.userInfoRepository.save(userInfo);
     }

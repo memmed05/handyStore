@@ -11,10 +11,13 @@ public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_info_id")
-    private Integer userInfoId;
+    private Integer id;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
 
     @Column(name = "phone_number")
     private String phoneNumber;

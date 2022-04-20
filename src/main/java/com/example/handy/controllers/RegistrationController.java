@@ -5,25 +5,27 @@ import com.example.handy.exceptions.UserAlreadyExistException;
 import com.example.handy.model.User;
 import com.example.handy.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping(value = "/api/v1/user/")
+@Controller
+@RequestMapping(value = "/user/")
 @RequiredArgsConstructor
 public class RegistrationController {
 
     private final UserService userService;
 
     @GetMapping(value = "/signup")
-    public String register(UserDto userDto, Model model) {
-        model.addAttribute("user", userDto);
+    public String register(Model model) {
+        model.addAttribute("user",new UserDto());
+
         return "signup";
     }
 
     @PostMapping(value = "/register")
-    public String saveUser(@ModelAttribute("user") UserDto userDto) throws UserAlreadyExistException {
+    public String saveUser(UserDto userDto) throws UserAlreadyExistException {
         this.userService.register(userDto);
-        return "redirect:/signup";
+        return "signin";
     }
 }
