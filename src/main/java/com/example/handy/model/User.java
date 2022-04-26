@@ -2,13 +2,14 @@ package com.example.handy.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "USERS")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "userInfo"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +22,17 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy = "user")
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Role> roles;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private UserInfo userInfo;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Post> posts;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private WishList wishList;
 
 }

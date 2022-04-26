@@ -11,7 +11,7 @@ public class ExceptionHandler {
     public String handleException(UserAlreadyExistException e, Model model) {
         ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND.value(), e.getMessage());
         model.addAttribute("error", errorDetails.getMessage());
-        return "redirect:/user/signup";
+        return "redirect:/signup";
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(
@@ -19,7 +19,7 @@ public class ExceptionHandler {
     public String handleException(WrongEmailException e, Model model) {
         ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND.value(), e.getMessage());
         model.addAttribute("error");
-        return "redirect:/user/signin";
+        return "redirect:/signin";
     }
 
 }

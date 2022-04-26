@@ -48,8 +48,9 @@
                 <a class="nav-link  text-left e-nav-link d-flex text-center d-flex justify-content-center"
                    href="/update">
                     <img alt="profile picture" class="e-profile-img" height="50" src="img/logo/123.jpg"
-                         th:src="@{${loggedUser.getImage()}}" width="50">
-                    <p class="ml-2 e-par" th:text="${loggedUser.getName()}+' '+${loggedUser.getSurname()}">Emin
+                         th:src="@{${loggedUser.getUserInfo().getProfilePhoto()}}" width="50">
+                    <p class="ml-2 e-par"
+                       th:text="${loggedUser.getUserInfo().getName()}+' '+${loggedUser.getUserInfo().getSurname()}">Emin
                         Israfilzadeh</p>
                 </a>
             </li>
@@ -69,7 +70,7 @@
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
                     <div aria-labelledby="dropdownMenuButton" class="dropdown-menu e-dd-content">
-                        <a class="dropdown-item" href="/myposts"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a class="dropdown-item" href="/myposts/1"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
                         <a class="dropdown-item" href="/wishlist"><i class="fas fa-heart mr-2"></i>View your
                             wishlist</a>
                     </div>
@@ -116,11 +117,11 @@
 
             <div class="position-relative e-post-top">
                 <div class="position-absolute e-post-datetime">
-                    <p class="col-12 m-0 font-weight-bold e-post-date" th:text="${post.date}">20.10.2020</p>
+                    <p class="col-12 m-0 font-weight-bold e-post-date" th:text="${post.expiryDate}">20.10.2020</p>
                 </div>
                 <div class="e-post-img">
                     <img alt="post" src="img/logo/123.jpg" style="height: 250px; object-fit: contain"
-                         th:src="${post.image}">
+                         th:src="${post.imageUrl}">
                 </div>
             </div>
             <div class="e-post-bottom">
@@ -128,17 +129,18 @@
                     <div class="e-post-data">
                         <p class="col-12 mb-1 text-center" style="color: white" th:text="${post.name}">Boy</p>
                         <i class="fas fa-user col-2"></i>
-                        <a class="card-link"
-                           th:href="'/user/'+${post.user.getId()}" th:text="${post.user.getName()} + ' ' + ${post.user.getSurname()}">Emin
+                        <a th:href="'/user/'+${post.user.getId()}"
+                           th:text="${post.user.getUserInfo().getName()} + ' ' + ${post.user.getUserInfo().getSurname()}"
+                           class="card-link">Emin
                             Israfilzadeh</a>
                     </div>
                     <div class="e-post-data">
                         <i class="fas fa-city col-2"></i>
-                        <p class="d-inline-block" th:text="${post.city}">Baku</p>
+                        <p class="d-inline-block" th:text="${post.city} ">Baku</p>
                     </div>
                     <div class="e-post-data">
                         <i class="far fa-calendar-alt col-2"></i>
-                        <p class="d-inline-block" th:text="${post.expiry_date}">23.07.2020</p>
+                        <p class="d-inline-block" th:text="${post.expiryDate}">23.07.2020</p>
                     </div>
                 </div>
                 <div class="e-post-contact">
@@ -161,18 +163,20 @@
             <ul class="pagination pagination-lg justify-content-center">
 
                 <li class="page-item">
-                    <a aria-disabled="true" class="page-link" tabindex="-1" th:href="@{'/dashboard/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                    <a aria-disabled="true" class="page-link" tabindex="-1"
+                       th:href="@{'/dashboard/'+${currentPage-1}}"
                        th:if="${currentPage>1}">Previous</a>
                 </li>
 
-                <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPages)}">
-                    <a class="page-link" th:href="@{'/dashboard/' + ${i} +'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
-                       th:if="${i!=currentPage}">[[${i}]]</a>
-                    <span class="page-link" th:unless="${i!=currentPage}">[[${i}]]</span>
-                </li>
+                 <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPages)}">
+                     <a class="page-link" th:href="@{'/dashboard/' + ${i}}"
+                        th:if="${i!=currentPage}">[[${i}]]</a>
+                     <span class="page-link" th:unless="${i!=currentPage}">[[${i}]]</span>
+                 </li>
 
                 <li class="page-item">
-                    <a class="page-link" th:href="@{'/dashboard/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                    <a class="page-link"
+                       th:href="@{'/dashboard/'+${currentPage+1}}"
                        th:if="${currentPage<totalPages}">Next</a>
                     <span class="page-link" th:unless="${currentPage<totalPages}">Next</span>
                 </li>
@@ -188,7 +192,7 @@
             <ul class="col-12 e-footer-list">
                 <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage
                     your account</a></li>
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts/1"><i class="fas fa-edit col-2"></i>Manage
                     your posts</a></li>
             </ul>
         </section>

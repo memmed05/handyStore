@@ -28,7 +28,7 @@
     <div class="e-nav-container">
         <ul class="col-12 e-nav-list">
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a class="nav-link e-nav-link" href="/dashboard"><i class="fas fa-columns mr-2"></i>Dashboard</a>
+                <a class="nav-link e-nav-link" href="/dashboard/1"><i class="fas fa-columns mr-2"></i>Dashboard</a>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
                 <div class="dropdown">
@@ -37,7 +37,7 @@
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
                     <div aria-labelledby="dropdownMenuButton" class="dropdown-menu e-dd-content">
-                        <a class="dropdown-item" href="/myposts"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a class="dropdown-item" href="/myposts/1"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
                         <a class="dropdown-item" href="/wishlist"><i class="fas fa-heart mr-2"></i>View your
                             wishlist</a>
                     </div>
@@ -59,17 +59,17 @@
                     Image
                 </th>
                 <th scope="col">
-                    <a th:href="@{'/myposts/'+${currentPage}+'?sortField=name&sortDir='+${reverseSortDir}}">
+                    <a th:href="@{'/myposts/'+${currentPage}}">
                         Name
                     </a>
                 </th>
                 <th scope="col">
-                    <a th:href="@{'/myposts/'+${currentPage}+'?sortField=category&sortDir='+${reverseSortDir}}">
+                    <a th:href="@{'/myposts/'+${currentPage}}">
                         Category
                     </a>
                 </th>
                 <th scope="col">
-                    <a th:href="@{'/myposts/'+${currentPage}+'?sortField=expiry_date&sortDir='+${reverseSortDir}}">
+                    <a th:href="@{'/myposts/'+${currentPage}}">
                         Expiry date
                     </a>
                 </th>
@@ -90,13 +90,13 @@
                 </td>
                 <td class="align-middle">
                     <a class="btn btn-lg" style="color: rgba(0, 11, 141, 0.7)"
-                       th:href="'/myposts/delete/' + ${post.id}">
+                       th:href="'/mypost/delete/' + ${post.id}">
                         <i class="fas fa-times"></i></a>
                 </td>
             </tr>
             <tr>
                 <td colspan="6">
-                    <a class="col-12 btn font-weight-bold" style="color:rgba(0, 11, 141, 0.7)" th:href="'/post'"> <i
+                    <a class="col-12 btn font-weight-bold" style="color:rgba(0, 11, 141, 0.7)" th:href="'/mypost/0'"> <i
                             class="fas fa-plus mr-2"></i>Add</a>
                 </td>
             </tr>
@@ -105,24 +105,23 @@
 
 
     </div>
-  <!--  <div>
-        <a th:href="@{'/myposts/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+    <div>
+        <a th:href="@{'/myposts/'+${currentPage-1}}"
            th:if="${currentPage>1}">Previous</a>
         <span th:unless="${currentPage>1}">Previous</span>
 
 
         <span th:each="i: ${#numbers.sequence(1,totalPages)}">
-            <a th:href="@{'/myposts/' + ${i} +'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+            <a th:href="@{'/myposts/' + ${i}}"
                th:if="${i!=currentPage}">[[${i}]]</a>
             <span th:unless="${i!=currentPage}">[[${i}]]</span>
             </span>
 
 
-        <a th:href="@{'/myposts/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+        <a th:href="@{'/myposts/'+${currentPage+1}}"
            th:if="${currentPage<totalPages}">Next</a>
         <span th:unless="${currentPage<totalPages}">Next</span>
     </div>
--->
     <footer class="col-12 mt-3 e-footer-container" id="contact">
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">

@@ -1,6 +1,7 @@
 package com.example.handy.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -31,7 +32,11 @@ public class Post {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne
-    @JoinColumn(name = "wished_id")
+    @OneToOne(mappedBy = "post")
     private WishList wished;
+
+    @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

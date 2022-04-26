@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <script
+          crossorigin="anonymous"
+          src="https://kit.fontawesome.com/38cd4014df.js"
+  ></script>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap-grid.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.css}">
+  <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+  <link rel="stylesheet" th:href="@{/css/owl.theme.default.css}">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="icon" th:href="@{/img/logo/ico2.ico}">
+  <title>Manage your posts</title>
+</head>
+<body>
+
+<div class="container-fluid col-12 mt-1 text-center main-container">
+  <div class="e-nav-container">
+    <ul class="col-12 e-nav-list">
+      <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
+        <a class="nav-link e-nav-link" href="/dashboard"><i class="fas fa-columns mr-2"></i>Dashboard</a>
+      </li>
+      <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
+        <div class="dropdown">
+          <button aria-expanded="false" aria-haspopup="true" class="btn dropdown-toggle e-main-dropdown"
+                  data-toggle="dropdown" id="dropdownMenuButton" type="button">
+            <i class="fas fa-clipboard mr-2"></i>Posts
+          </button>
+          <div aria-labelledby="dropdownMenuButton" class="dropdown-menu e-dd-content">
+            <a class="dropdown-item" href="/myposts"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+            <a class="dropdown-item" href="/wishlist"><i class="fas fa-heart mr-2"></i>View your
+              wishlist</a>
+          </div>
+        </div>
+      </li>
+      <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
+        <a class="nav-link e-nav-link" href="/message"><i class="fas fa-envelope mr-2"></i>Messages</a>
+      </li>
+      <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
+        <a class="nav-link e-nav-link" href="/logout"><i class="fas fa-sign-out-alt mr-2"></i>Log out</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-12 e-post-container p-3">
+    <table class="table table-responsive-sm" style="background-color: white; color: rgba(0, 11, 141, 0.7)">
+      <thead>
+      <tr>
+        <th scope="col">
+          Image
+        </th>
+        <th scope="col">
+          <a th:href="@{'/myposts/'+${currentPage}}">
+            Name
+          </a>
+        </th>
+        <th scope="col">
+          <a th:href="@{'/myposts/'+${currentPage}}">
+            Category
+          </a>
+        </th>
+        <th scope="col">
+          <a th:href="@{'/myposts/'+${currentPage}}">
+            Expiry date
+          </a>
+        </th>
+        <th colspan="2" scope="col">
+          Action
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="post : ${posts}">
+        <td><img alt="" height="50" style="border-radius: 50%" th:src="${post.getPost().imageUrl}" width="50"></td>
+        <td class="align-middle" th:text="${post.getPost().name}"></td>
+        <td class="align-middle" th:text="${post.getPost().category.getName()}"></td>
+        <td class="align-middle" th:text="${post.getPost().expiryDate}"></td>
+        <td class="align-middle">
+          <a class="btn btn-lg" style="color: rgba(0, 11, 141, 0.7)" th:href="'/mypost/' + ${post.getPost().id}">
+            <i class="fas fa-edit"></i></a>
+        </td>
+        <td class="align-middle">
+          <a class="btn btn-lg" style="color: rgba(0, 11, 141, 0.7)"
+             th:href="'/mypost/delete/' + ${post.getPost().id}">
+            <i class="fas fa-times"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <a class="col-12 btn font-weight-bold" style="color:rgba(0, 11, 141, 0.7)" th:href="'/mypost/'"> <i
+                  class="fas fa-plus mr-2"></i>Add</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+<!--  <div>
+    <a th:href="@{'/myposts/'+${currentPage-1}}"
+       th:if="${currentPage>1}">Previous</a>
+    <span th:unless="${currentPage>1}">Previous</span>
+
+
+    <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+            <a th:href="@{'/myposts/' + ${i}}"
+               th:if="${i!=currentPage}">[[${i}]]</a>
+            <span th:unless="${i!=currentPage}">[[${i}]]</span>
+            </span>
+
+
+    <a th:href="@{'/myposts/'+${currentPage+1}}"
+       th:if="${currentPage<totalPages}">Next</a>
+    <span th:unless="${currentPage<totalPages}">Next</span>
+  </div>-->
+  <footer class="col-12 mt-3 e-footer-container" id="contact">
+    <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
+      <ul class="col-12 e-footer-list">
+        <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage
+          your account</a></li>
+        <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage
+          your posts</a></li>
+      </ul>
+    </section>
+    <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
+      <ul class="col-12 e-footer-list">
+        <li class="col-12 my-1 e-footer-item"><a class="" href="/feedback"><i
+                class="fas fa-exclamation-triangle col-2"></i>Send feedback</a></li>
+      </ul>
+    </section>
+    <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
+      <ul class="col-12 e-footer-list">
+        <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.facebook.com/"><i
+                class="fab fa-facebook-f col-2"></i>Facebook</a></li>
+        <li class="col-12 my-1 e-footer-item"><a class="" href="https://www.instagram.com/"><i
+                class="fab fa-instagram col-2"></i>Instagram</a></li>
+        <li class="col-12 my-1 e-footer-item"><a class="" href="https://twitter.com/"><i
+                class="fab fa-twitter col-2"></i>Twitter</a></li>
+      </ul>
+    </section>
+  </footer>
+  <div class="col-12 mt-3 e-copyright-container alert alert-danger pb-0">
+    <p class="col-12 e-copyright-text">
+      <i class="far fa-copyright mr-2"></i>
+      All rights reserved | You should have permission by author for using any information or data provided by
+      this website. <br>
+      This website is made by Ayshan Rzayeva | Shafa Mammadova | Leman Javadova | Emin Israfilzadeh
+    </p>
+  </div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

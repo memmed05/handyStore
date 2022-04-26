@@ -28,7 +28,7 @@
     <div class="e-nav-container">
         <ul class="col-12 e-nav-list">
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a href="/dashboard" class="nav-link e-nav-link"><i class="fas fa-columns mr-2"></i>Dashboard</a>
+                <a href="/dashboard/1" class="nav-link e-nav-link"><i class="fas fa-columns mr-2"></i>Dashboard</a>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
                 <div class="dropdown">
@@ -37,7 +37,7 @@
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
                     <div class="dropdown-menu e-dd-content" aria-labelledby="dropdownMenuButton">
-                        <a href="/myposts" class="dropdown-item"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a href="/myposts/1" class="dropdown-item"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
                         <a href="/wishlist" class="dropdown-item"><i class="fas fa-heart mr-2"></i>View your
                             wishlist</a>
                     </div>
@@ -53,9 +53,9 @@
     </div>
     <div class="col-12 e-user-container">
         <div class="e-user-content">
-            <!--<div class="e-user-img">
-                <img th:src="${loggedUser.image}" width="200" height="200" alt="">
-            </div>-->
+            <div class="e-user-img">
+                <img th:src="${loggedUser.getUserInfo().getProfilePhoto()}" width="200" height="200" alt="">
+            </div>
             <div class="e-user-info">
                 <form method="post" enctype="multipart/form-data"
                       class="col-12 form-group d-inline-block e-form">
@@ -73,10 +73,10 @@
                         <option disabled selected>Select your city</option>
                         <option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}"></option>
                     </select>
-                    <input name="phoneNumber" required type="text" class="col-12 form-control e-input"
+                    <input name="number" required type="text" class="col-12 form-control e-input"
                            placeholder="Enter your mobile number: XXYYYZZWW">
                     <label for="profile-pic" class="form-control text-left e-label">Upload profile photo</label>
-                    <input name="profilePhoto" required type="file" class="col-12 form-control-file e-file" id="profile-pic">
+                    <input name="file" required type="file" class="col-12 form-control-file e-file" id="profile-pic">
                     <input type="submit" value="Save" class="col-12 form-control e-submit">
                 </form>
             </div>
@@ -87,7 +87,7 @@
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
                 <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage your account</a></li>
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage your posts</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts/1"><i class="fas fa-edit col-2"></i>Manage your posts</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">

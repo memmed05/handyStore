@@ -28,7 +28,7 @@
     <div class="e-nav-container">
         <ul class="col-12 e-nav-list">
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a href="/dashboard" class="nav-link e-nav-link"><i class="fas fa-columns mr-2"></i>Dashboard</a>
+                <a href="/dashboard/1" class="nav-link e-nav-link"><i class="fas fa-columns mr-2"></i>Dashboard</a>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
                 <div class="dropdown">
@@ -37,7 +37,7 @@
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
                     <div class="dropdown-menu e-dd-content" aria-labelledby="dropdownMenuButton">
-                        <a href="/myposts" class="dropdown-item"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a href="/myposts/1" class="dropdown-item"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
                         <a href="/wishlist" class="dropdown-item"><i class="fas fa-heart mr-2"></i>View your
                             wishlist</a>
                     </div>
@@ -54,12 +54,12 @@
     <div class="col-12 e-user-container">
         <div class="e-user-content">
             <div class="e-user-img">
-                <img src="img/logo/123.jpg" th:src="${user.image}" width="300" height="300" alt="">
+                <img src="img/logo/123.jpg" th:src="${user.getProfilePhoto()}" width="300" height="300" alt="">
             </div>
             <div class="e-user-info">
-                <h1 th:text="${user.name} + ' ' + ${user.surname}" class="col-12 e-user-data"></h1>
-                <p th:text="${user.city}" class="col-12 e-user-data"></p>
-                <p th:text="'(+994) ' + ${user.phone}" class="col-12 e-user-data"></p>
+                <h1 th:text="${user.getName()} + ' ' + ${user.getSurname()}" class="col-12 e-user-data"></h1>
+                <p th:text="${user.getCity()}" class="col-12 e-user-data"></p>
+                <p th:text="'(+994) ' + ${user.getPhoneNumber()}" class="col-12 e-user-data"></p>
                 <a th:href="'/message/'+${user.id}" class="col-lg-3 col-md-3 col-sm-12 btn nav-link e-user-btn"><i class="fas fa-envelope col-2"></i>Send Message</a>
                 <a th:href="'block/' + ${user.id}"  class="col-lg-3 col-md-3 col-sm-12 btn nav-link e-user-btn"><i class="fas fa-times col-2"></i>Block</a>
             </div>
@@ -70,7 +70,7 @@
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">
             <ul class="col-12 e-footer-list">
                 <li class="col-12 my-1 e-footer-item text-left"><a href="/update"><i class="fas fa-user-edit col-2"></i>Manage your account</a></li>
-                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts"><i class="fas fa-edit col-2"></i>Manage your posts</a></li>
+                <li class="col-12 my-1 e-footer-item text-left"><a href="/myposts/1"><i class="fas fa-edit col-2"></i>Manage your posts</a></li>
             </ul>
         </section>
         <section class="col-lg-4 col-md-4 col-sm-12 e-footer-content">

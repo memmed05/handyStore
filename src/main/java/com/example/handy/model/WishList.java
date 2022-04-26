@@ -15,8 +15,13 @@ public class WishList {
     @Column(name = "wihsh_id")
     private Integer id;
 
-    @OneToOne(mappedBy = "wished")
+    @OneToOne
+    @JoinColumn(name = "post_id")
     private Post post;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 }

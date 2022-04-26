@@ -20,8 +20,8 @@
     <link rel="stylesheet" th:href="@{/css/owl.theme.default.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="icon" th:href="@{/img/logo/ico2.ico}">
-        <title th:if="${post.getId()} !=0 " th:text="${post.getName()} + ' | Update'"></title>
-        <title th:if="${post.getId()} ==0" th:text="'New post'"></title>
+    <title th:if="${post.getId()} !=0 " th:text="${post.getName()} + ' | Update'"></title>
+    <title th:if="${post.getId()} ==0" th:text="'New post'"></title>
 </head>
 <body>
 
@@ -29,7 +29,7 @@
     <div class="e-nav-container">
         <ul class="col-12 e-nav-list">
             <li class="col-lg-2 col-md-12 col-sm-12 e-nav-item">
-                <a class="nav-link e-nav-link" href="/dashboard"><i class="fas fa-columns mr-2"></i>Dashboard</a>
+                <a class="nav-link e-nav-link" href="/dashboard/1"><i class="fas fa-columns mr-2"></i>Dashboard</a>
             </li>
             <li class="col-lg-3 col-md-12 col-sm-12 e-nav-item">
                 <div class="dropdown">
@@ -38,7 +38,7 @@
                         <i class="fas fa-clipboard mr-2"></i>Posts
                     </button>
                     <div aria-labelledby="dropdownMenuButton" class="dropdown-menu e-dd-content">
-                        <a class="dropdown-item" href="/myposts"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
+                        <a class="dropdown-item" href="/myposts/1"><i class="fas fa-edit mr-2"></i>Manage your posts</a>
                         <a class="dropdown-item" href="/wishlist"><i class="fas fa-heart mr-2"></i>View your
                             wishlist</a>
                     </div>
@@ -58,9 +58,13 @@
                 <img src="../static/img/logo/123.jpg" width="300" height="150" alt="">
             </div>
             <div class="e-posting-info">
-                <form class="col-lg-12 col-md-6 col-sm-12 form-group d-inline-block e-form" enctype="multipart/form-data"
-                      th:action="@{/post/addPost}" method="post">
-                    <input class="col-12 form-control-lg e-input" name="name" placeholder="Enter product name" required
+                <form class="col-lg-12 col-md-6 col-sm-12 form-group d-inline-block e-form"
+                      enctype="multipart/form-data"
+                      th:if="${post.getId()==0}" th:action="@{/mypost/addPost}" then method="post">
+
+
+                    <input class="col-12 form-control-lg e-input" name="name" placeholder="Enter product name"
+                           required
                            type="text">
                     <select class="col-12 form-control-lg e-input" name="category" required>
                         <option disabled selected>Select category</option>
@@ -70,13 +74,43 @@
                     <select class="col-12 form-control-lg e-input" name="city" required>
                         <option disabled selected>Select your city</option>
                         <option th:each="city : ${cities}"
-                                th:text="${city.name}" th:value="${city.id}"></option>
+                                th:text="${city.getName()}" th:value="${city.getId()}"></option>
                     </select>
                     <input class="col-12 form-control-lg e-input" name="expiryDate" placeholder="Enter expiry date"
                            required
+
                            type="date">
-                    <label for="profile-pic" class="form-control-lg form-control text-left e-label">Upload image </label>
-                    <input required name="image" type="file" class="col-12 form-control-file-lg e-file" id="profile-pic">
+                    <label for="profile-pic" class="form-control-lg form-control text-left e-label">Upload
+                        image </label>
+                    <input required name="image" type="file" class="col-12 form-control-file-lg e-file"
+                           id="profile-pic">
+                    <input class="col-12 form-control e-submit" name="save" type="submit" value="Save">
+                </form>
+                <form class="col-lg-12 col-md-6 col-sm-12 form-group d-inline-block e-form"
+                      enctype="multipart/form-data"
+                      th:if="${post.getId()!=0}" th:action="@{'/mypost/update/' + ${post.getId()}}"
+                      method="post">
+                    <input class="col-12 form-control-lg e-input" name="name" placeholder="Enter product name"
+                           required
+                           type="text">
+                    <select class="col-12 form-control-lg e-input" name="category" required>
+                        <option disabled selected>Select category</option>
+                        <option th:each="cat : ${categories}"
+                                th:text="${cat.getName()}" th:value="${cat.id}"></option>
+                    </select>
+                    <select class="col-12 form-control-lg e-input" name="city" required>
+                        <option disabled selected>Select your city</option>
+                        <option th:each="city : ${cities}"
+                                th:text="${city.getName()}" th:value="${city.getId()}"></option>
+                    </select>
+                    <input class="col-12 form-control-lg e-input" name="expiryDate" placeholder="Enter expiry date"
+                           required
+
+                           type="date">
+                    <label for="profile-pic" class="form-control-lg form-control text-left e-label">Upload
+                        image </label>
+                    <input required name="image" type="file" class="col-12 form-control-file-lg e-file"
+                           id="profile-pic">
                     <input class="col-12 form-control e-submit" name="save" type="submit" value="Save">
                 </form>
             </div>
